@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: black; /* Sets the background color to black */
+    color: white; /* Sets the text color to white for better readability */
+    padding: 20px; /* Adds padding to the body content */
+}
+
+h1 {
+    color: blue; /* Sets the heading color to blue */
+}
+
+p {
+    font-size: 18px; /* Sets the paragraph font size */
+}
+.credit {
+    text-align: center; /* Centers the content */
+    margin-bottom: 20px; /* Adds space between credit and main content */
+}
+
+.credit img {
+    width: 100px; /* Adjusts the size of the Discord icon */
+    height: 100px; /* Adjusts the height of the Discord icon */
+    border-radius: 50%; /* Makes the icon round */
+    margin-bottom: 10px; /* Adds space between icon and username */
+}
+
+.credit p {
+    font-size: 18px; /* Sets the font size */
+    margin-top: 0; /* Removes top margin to align with image */
+}
+.credit-text p {
+    text-align: center; /* Centers the text */
+    margin-top: 20px; /* Adds space between text and credit section */
+    color: purple; /* Sets the text color to bright purple */
+    font-size: 24px; /* Sets the font size of the text */
+}
+.styled-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.styled-button:hover {
+    background-color: gray; /* Darker shade when hovered */
+}
+
+.button-container {
+    text-align: center; /* Centers the button horizontally */
+    margin-top: 20px; /* Adds space above the button */
+}
+
+.centered-button {
+    text-align: center; /* Centers the content */
+    margin-top: 50px; /* Adds space above the button */
+}
