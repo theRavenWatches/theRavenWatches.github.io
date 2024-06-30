@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Story Contents</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://cdn.dribbble.com/users/1805960/screenshots/5822834/static-tv.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Prevent scroll bars */
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .centered-button {
+            margin-top: 20px;
+            animation: bob 2s infinite alternate; /* Adding bobbing animation */
+        }
+
+        @keyframes bob {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-10px); /* Adjust this value for the desired bobbing effect */
+            }
+        }
+
+        .bottom-button-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            width: 100%;
+        }
+
+        .bottom-button, .styled-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: black;
+            background-color: white;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            position: relative;
+        }
+
+        .bottom-button:hover, .styled-button:hover {
+            background-color: lightgray;
+        }
+
+        .button-container {
+            position: absolute;
+            top: 20px; /* Adjust top position as needed */
+            left: 20px;
+        }
+
+        .centered-info {
+            position: absolute;
+            top: 20px; /* Align with Open Terminal */
+            right: 20px; /* Adjust right position as needed */
+        }
+
+        .bottom-left-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .styled-button::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: rgba(255, 0, 0, 0.7);
+            z-index: -1;
+            transform: translate(-2px, -2px);
+        }
+
+        .styled-button::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: rgba(0, 255, 255, 0.7);
+            z-index: -1;
+            transform: translate(2px, 2px);
+        }
+
+        .dropdown {
+            margin: 20px;
+        }
+
+        .dropdown-content {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .dropdown-content p {
+            margin: 0;
+        }
+
+        .dropdown-btn {
+            cursor: pointer;
+            font-size: 1.5em;
+            border: none;
+            background: none;
+            color: white;
+            text-decoration: underline;
+        }
+
+        .dropdown-btn:hover {
+            color: orange;
+        }
+
+        .info-section, .text-section {
+            display: none;
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Allow scrolling for text-section */
+        }
+
+        .back-btn {
+            margin-top: 50px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: white;
+            background-color: orange;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background-color: darkorange;
+        }
+    </style>
+    <script>
+        function toggleInfo() {
+            var infoSection = document.getElementById('infoSection');
+            var textSection = document.getElementById('textSection');
+            var mainSection = document.getElementById('mainSection');
+
+            if (infoSection.style.display === "none") {
+                infoSection.style.display = "block";
+                textSection.style.display = "none";
+                mainSection.style.display = "none";
+            } else {
+                infoSection.style.display = "none";
+                mainSection.style.display = "block";
+            }
+        }
+
+        function toggleText() {
+            var infoSection = document.getElementById('infoSection');
+            var textSection = document.getElementById('textSection');
+            var mainSection = document.getElementById('mainSection');
+
+            if (textSection.style.display === "none") {
+                textSection.style.display = "block";
+                infoSection.style.display = "none";
+                mainSection.style.display = "none";
+            } else {
+                textSection.style.display = "none";
+                mainSection.style.display = "block";
+                textSection.scrollTop = 0; /* Reset scroll position when returning */
+            }
+        }
+
+        function toggleDropdown(id) {
+            var content = document.getElementById(id);
+            if (content.style.display === "none") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="mainSection">
+        <main>
+            <div class="centered-button button-container">
+                <a href="logs.html" class="styled-button" data-text="Open Terminal">Open Terminal</a>
+            </div>
+        </main>
+
+        <div class="centered-info">
+            <a href="javascript:void(0)" class="styled-button" data-text="Important Info" onclick="toggleInfo()">Important Info</a>
+        </div>
+        
+        <div class="bottom-button-container">
+            <a href="index.html" class="bottom-button">Back to Home</a>
+        </div>
+
+        <div class="bottom-left-button">
+            <a href="javascript:void(0)" class="styled-button" data-text="Text Section" onclick="toggleText()">Patch Notes</a>
+        </div>
+    </div>
+
+    <div id="infoSection" class="info-section">
+        <div class="dropdown">
+            <button class="dropdown-btn" onclick="toggleDropdown('dropdown1')">Known Issues</button>
+            <div id="dropdown1" class="dropdown-content">
+                <p>Updating the website requires you to hard reset its cache. I tried to make a script to offload the cache but it doesn't work so sad.<br><br>Website does not work super well on mobile. Not much I can do there.<br><br>Background disappears when clicking information button. Yikes. Gonna fix that... uh... eventually.</p>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropdown-btn" onclick="toggleDropdown('dropdown2')">Story Information</button>
+            <div id="dropdown2" class="dropdown-content">
+                <p>The Raven is a digital audio based web horror story that is mostly based on speculation by the viewer. Not a lot will make sense yet. It will in time as this site gets updated. Believe me.<br><br>Since it isn't explicitly said anywhere else currently, 'see.file' is the only command that is available right now (or is it i dont really know). refer to the google doc for the commands to open files lol.<br><br>DO NOT INSPECT HTML<br>Because this is all built on github, inspecting the HTML files would give away some secrets you're meant to find on your own<br>Please don't spoil, this story is only interesting if you let it be.</p>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropdown-btn" onclick="toggleDropdown('dropdown3')">Creator Information</button>
+            <div id="dropdown3" class="dropdown-content">
+                <p>Hi! I'm katomate! I make small little stories to keep myself sane and this one just so happened to be the one people liked the most. I'm 16 I live in the US and I have very low patience. <3</p>
+            </div>
+        </div>
+
+        <button class="back-btn" onclick="toggleInfo()">Back</button>
+    </div>
+
+    <div id="textSection" class="text-section">
+        <h1>PATCH NOTES 0.1</h1>
+        <p>Added background music and background image to Story Contents. Looks a lot cleaner, no?<br><br>Added Patch Notes to Story Contents<br><br>Added Important Info dropdown menu's to Story Contents, effectively rendering the existence of the Information page useless, as it is now bundled with Story Contents<br><br>Added bobbing effect to the Open Terminal button<br><br>Website is now in beta testing!</p>
+        <h2>Upcoming Update 0.2</h2>
+        <p2>Background for Index page<br><br>HOPEFULLY a new Terminal update.<br><br>Cleaner looking Index page.<br><br>Background music compatibility for browsers with media autoplay disabled<br><br>Hopefully better mobile support<br><br>MAYBE a custom font.</p2>
+        <button class="back-btn" onclick="toggleText()">Back</button>
+    </div>
+
+    <audio autoplay loop>
+        <source src="https://github.com/theravenwatches/theravenwatches.github.io/raw/main/audio/bg.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</body>
+</html>
