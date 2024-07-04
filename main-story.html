@@ -204,13 +204,32 @@
                 content.style.display = "none";
             }
         }
+
+        function playAndNavigate() {
+            fadeOutElements();
+            setTimeout(function() {
+                var audio = new Audio('https://github.com/theRavenWatches/theRavenWatches.github.io/raw/main/audio/storycontents_bootupsound.mp3');
+                audio.play();
+                audio.onended = function() {
+                    window.location.href = 'logs.html';
+                };
+            }, 3000); // Wait for fade-out effect (3 seconds) before playing audio
+        }
+
+        function fadeOutElements() {
+            var elementsToFade = document.querySelectorAll('.centered-button, .centered-info, .bottom-button-container, .bottom-left-button');
+            elementsToFade.forEach(function(element) {
+                element.style.transition = "opacity 3s ease";
+                element.style.opacity = 0;
+            });
+        }
     </script>
 </head>
 <body>
     <div id="mainSection">
         <main>
             <div class="centered-button button-container">
-                <a href="logs.html" class="styled-button" data-text="Open Terminal">Open Terminal</a>
+                <a href="#" class="styled-button" data-text="Open Terminal" onclick="playAndNavigate()">Open Terminal</a>
             </div>
         </main>
 
