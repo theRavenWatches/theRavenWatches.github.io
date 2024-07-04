@@ -4,8 +4,26 @@
     <title>The Raven</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://64.media.tumblr.com/01b91bd06c8e0214189ed6bc4e915f01/e5b3180b523c2d26-cf/s1280x1920/61fa3f639f38f39161240c6fdd5f71dde3f6fa37.gif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+
         .extra-button-container {
-            margin-top: 20px;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
             text-align: center;
         }
 
@@ -13,15 +31,110 @@
             display: inline-block;
             padding: 10px 20px;
             font-size: 1.2em;
-            color: white;
-            background-color: orange;
+            color: lightblue;
+            background-color: Black;
             border: none;
             text-decoration: none;
             cursor: pointer;
         }
 
-        .extra-button:hover {
-            background-color: darkorange;
+        .credit {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .credit img {
+            display: block;
+            margin: 0 auto; 
+            margin-bottom: 10px; 
+        }
+
+        .credit-text {
+            text-align: center;
+            font-size: 1.5em;
+            color: lightblue;
+            z-index: 1;
+        }
+
+        .styled-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: white;
+            background-color: black;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+            z-index: 1;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .styled-button:hover {
+            box-shadow: 0 0 10px white;
+            color: black
+        }
+
+        .styled-button:before,
+        .styled-button:after {
+            content: 'Continue';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            color: White;
+            clip: rect(0, 0, 0, 0);
+            animation: glitch 1.0s infinite;
+        }
+
+        .styled-button:before {
+            left: 2px;
+            text-shadow: -2px 0 red;
+        }
+
+        .styled-button:after {
+            left: -2px;
+            text-shadow: -2px 0 blue;
+        }
+
+        @keyframes glitch {
+            0% {
+                clip: rect(0, 9999px, 0, 0);
+                transform: translate(0);
+            }
+            20% {
+                clip: rect(10px, 9999px, 25px, 0);
+                transform: translate(-3px, 3px);
+            }
+            40% {
+                clip: rect(20px, 9999px, 15px, 0);
+                transform: translate(3px, -3px);
+            }
+            60% {
+                clip: rect(30px, 9999px, 35px, 0);
+                transform: translate(-3px, -3px);
+            }
+            80% {
+                clip: rect(40px, 9999px, 20px, 0);
+                transform: translate(3px, 3px);
+            }
+            100% {
+                clip: rect(50px, 9999px, 5px, 0);
+                transform: translate(0);
+            }
+        }
+
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -29,17 +142,61 @@
     <div class="credit">
         <img src="https://cdn.discordapp.com/avatars/796512162855125022/bd98e7a2c2a8a647f526c362188a8906.webp?size=128" alt="Discord Icon">
     </div>
-    
+
     <div class="credit-text">
-        <p>Created entirely by katomate on Discord!</p>
+        <p style="color: lightblue;">Created entirely by katomate on Discord!</p>
     </div>
 
     <div class="button-container">
-        <a href="main-story.html" class="styled-button">Continue</a>
+        <a href="javascript:void(0)" class="styled-button" onclick="playSoundAndNavigate()">Continue</a>
     </div>
 
     <div class="extra-button-container">
         <a href="https://discord.gg/zRQTgrPjzz" class="extra-button">Official Discord Server</a>
     </div>
+
+    <div class="page-hidden hidden"></div>
+    <div class="page-content">
+        <!-- Any other content on the page -->
+    </div>
+
+    <audio id="button-sound">
+        <source src="https://github.com/theRavenWatches/theRavenWatches.github.io/raw/main/audio/index_continuebuttonsound.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const continueButton = document.querySelector('.styled-button');
+        const initialBackground = 'url("https://64.media.tumblr.com/01b91bd06c8e0214189ed6bc4e915f01/e5b3180b523c2d26-cf/s1280x1920/61fa3f639f38f39161240c6fdd5f71dde3f6fa37.gif")';
+        const hoverBackground = 'url("https://s2-ug.ap4r.com/image-aigc-article/seoPic/origin/6f5f667478908c1b11e7b5a3d03a11a396749fa5.gif")';
+
+        document.body.style.backgroundImage = initialBackground;
+
+        continueButton.addEventListener('mouseover', function() {
+            document.body.style.backgroundImage = hoverBackground;
+            document.querySelector('.credit').classList.add('hidden');
+            document.querySelector('.credit-text').classList.add('hidden');
+            document.querySelector('.extra-button-container').classList.add('hidden');
+            document.querySelector('.page-content').classList.add('hidden');
+            document.querySelector('.page-hidden').classList.remove('hidden');
+        });
+
+        continueButton.addEventListener('mouseout', function() {
+            document.body.style.backgroundImage = initialBackground;
+            document.querySelector('.credit').classList.remove('hidden');
+            document.querySelector('.credit-text').classList.remove('hidden');
+            document.querySelector('.extra-button-container').classList.remove('hidden');
+            document.querySelector('.page-content').classList.remove('hidden');
+            document.querySelector('.page-hidden').classList.add('hidden');
+        });
+
+        function playSoundAndNavigate() {
+            var sound = document.getElementById("button-sound");
+            sound.play();
+            sound.onended = function() {
+                window.location.href = "main-story.html"; // Replace with your target page
+            };
+        }
+    </script>
 </body>
 </html>
