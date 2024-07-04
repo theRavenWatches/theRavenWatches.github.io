@@ -165,6 +165,8 @@
         }
     </style>
     <script>
+        var bgAudio = new Audio('https://github.com/theravenwatches/theravenwatches.github.io/raw/main/audio/bg.mp3');
+
         function toggleInfo() {
             var infoSection = document.getElementById('infoSection');
             var textSection = document.getElementById('textSection');
@@ -208,7 +210,7 @@
         function playAndNavigate() {
             fadeOutElements();
             setTimeout(function() {
-                var audio = new Audio('https://github.com/theRavenWatches/theRavenWatches.github.io/raw/main/audio/storycontents_bootupsound.mp3');
+                var audio = new Audio('https://github.com/theravenwatches/theravenwatches.github.io/raw/main/audio/storycontents_bootupsound.mp3');
                 audio.play();
                 audio.onended = function() {
                     window.location.href = 'logs.html';
@@ -222,6 +224,9 @@
                 element.style.transition = "opacity 3s ease";
                 element.style.opacity = 0;
             });
+
+            // Pause background audio
+            bgAudio.pause();
         }
     </script>
 </head>
