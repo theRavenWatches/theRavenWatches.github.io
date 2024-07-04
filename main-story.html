@@ -165,7 +165,7 @@
         }
     </style>
     <script>
-        var bgAudio = document.getElementById('bgAudio'); // Reference to the background audio element
+        var bgAudio = new Audio('https://github.com/theravenwatches/theravenwatches.github.io/raw/main/audio/bg.mp3');
 
         function toggleInfo() {
             var infoSection = document.getElementById('infoSection');
@@ -210,7 +210,7 @@
         function playAndNavigate() {
             fadeOutElements();
             setTimeout(function() {
-                var audio = new Audio('https://github.com/theravenwatches/theravenwatches.github.io/raw/main/audio/storycontent_bootupsound.mp3');
+                var audio = new Audio('https://github.com/theravenwatches/theravenwatches.github.io/raw/main/audio/storycontents_bootupsound.mp3');
                 audio.play();
                 audio.onended = function() {
                     window.location.href = 'logs.html';
@@ -284,7 +284,7 @@
         <button class="back-btn" onclick="toggleText()">Back</button>
     </div>
 
-    <audio id="bgAudio" autoplay loop>
+    <audio autoplay loop>
         <source src="https://github.com/theravenwatches/theravenwatches.github.io/raw/main/audio/bg.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
